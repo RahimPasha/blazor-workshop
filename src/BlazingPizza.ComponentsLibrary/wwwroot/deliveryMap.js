@@ -18,7 +18,7 @@
             }
 
             var map = elem.map;
-            if (map.addedMarkers.length !== markers.length) {
+            if ((map.addedMarkers && markers) && (map.addedMarkers.length !== markers.length)) {
                 // Markers have changed, so reset
                 map.addedMarkers.forEach(marker => marker.removeFrom(map));
                 map.addedMarkers = markers.map(m => {
@@ -35,7 +35,8 @@
                         map.addedMarkers[index].openPopup();
                     }
                 });
-            } else {
+            }
+            else if (markers) {
                 // Same number of markers, so update positions/text without changing view bounds
                 markers.forEach((marker, index) => {
                     animateMarkerMove(
